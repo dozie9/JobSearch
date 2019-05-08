@@ -1,0 +1,90 @@
+{% extends 'base.html'%}
+{% load extra_tags %}
+{% load static %}
+
+{% block title %}{{ q }}{% endblock %}
+
+{% block content %}
+ <!-- Header -->
+  <header class="masthead bg-secondary text-white text-center">
+    <div class="container">
+      <img class="img-fluid mb-5 d-block mx-auto" src="{% static 'img/search_logo.png' %}" alt="" width="10%" style="padding-top: 10px">
+      <h1 class="text-uppercase mb-0">Search Jobs</h1>
+      <h2 class="font-weight-light mb-0">boost your chances now</h2>
+    </div>
+  </header>
++
+
+  <!-- Portfolio Grid Section -->
+    <div class="container" style="padding-top: 3rem; padding-bottom: 3rem">
+        <div class="row">
+            {% for job in search_result %}
+                <div class="col-md-6" style="padding-bottom: 20px">
+                    <div class="card">
+                      <div class="card-header">
+                          <strong><i class="fas fa-bullseye"></i> {{ job.jobTitle }} | {{ job.jobType }}</strong>
+                      </div>
+                      <div class="card-body">
+                        <h6 class="card-title"><i class="fas fa-building"></i> {{ job.company }}</h6>
+                        <p class="card-text text-justify">{{ job.jobDescription|truncatewords:70 }}</p>
+                          {% if request.user.is_authenticated %}
+                        <a href="{{ job.link }}" class="btn btn-primary btn-sm"><i class="fas fa-briefcase"></i> Click to Apply</a> <button {% if job.link|saved:request.user %}disabled{% endif %} onclick="saveJob(this);" data-target="{{ job.link }}" style="padding-left: 10px" class="btn btn-info btn-sm"><i class="fas fa-save"></i> {% if job.link|saved:request.user %}Saved{% else %}Save{% endif %}</button>
+                          <br>
+                          {% endif %}
+                        <p>Match Rate, {% match resume job.jobDescription %}%</p>
+                          <div class="progress">
+                              <div class="progress-bar" role="progressbar" style="width:{% match resume job.jobDescription %}%" aria-valuenow="{% match resume job.jobDescription %}" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if page %}
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                {% for i in page_data.number %}
+                  {% if page_data.state > 1 and forloop.counter == 1 %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_data.state|add:"-1" }}">Previous</a></li>
+                  {% endif %}
+                    <li class="page-item {% if page_data.state == forloop.counter %}active{% endif %}"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                    {% if forloop.counter == page_data.number|length and page_data.state != page_data.number|length %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_data.state|add:1 }}">Next</a></li>
+                    {% endif %}
+                {% endfor %}
+              </ul>
+            </nav>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+    function saveJob(e) {
+        link = $(e).attr("data-target");
+        parent = $(e).parent().parent();
+        header = parent.find('.card-header').text().trim();
+        company = parent.find(".card-body").find(".card-title").text().trim();
+        check = send(header, company, link, e);
+        console.log(check);
+        if(check == true){
+            console.log(87654);
+        }
+    }
+    function send(header, company, link, e) {
+        var csrf = '{{ csrf_token }}';
+        $.ajax({
+            url: '/mark/',
+            method: 'POST', // This is the default though, you don't actually need to always mention it
+            data: {'link':link, 'header':header, 'company':company, 'csrfmiddlewaretoken':csrf},
+        }).done(function (msg) {
+            if(msg['status'] == 1){
+                $(e).html('<i class="fas fa-save"></i>  Saved');
+                $(e).attr('disabled', 'disabled')
+            }
+        });
+    }
+</script>
+
+{% endblock %}

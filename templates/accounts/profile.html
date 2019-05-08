@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+ <!-- anything here will override anything inside base.html blockhead -->
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top: 6rem; padding-bottom: 3rem">
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>User Id</label>
+            </div>
+            <div class="col-md-4">
+                <p>{{ request.user }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>First Name</label>
+            </div>
+            <div class="col-md-4">
+                <p>{{ request.user.first_name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Last Name</label>
+            </div>
+            <div class="col-md-4">
+                <p>{{ request.user.last_name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Email</label>
+            </div>
+            <div class="col-md-4">
+                <p>{{ request.user.email }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Phone Number</label>
+            </div>
+            <div class="col-md-4">
+                <p>{% if request.user.phone %}{{ request.user.phone }}{% else %}None{% endif %}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Password</label>
+            </div>
+            <div class="col-md-2">
+                <p>******</p>
+            </div>
+            <div class="col-md-4">
+                <a style="color: blue" href="{% url 'accounts:change_password' %}">Change Password</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Description</label>
+            </div>
+            <div class="col-md-4">
+                <p>{{ request.user.description }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <h1>Profile</h1>
+    <p>Username: {{ user }}</p>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }} </p>
+    <p>Email: {{ user.email }} </p>
+    <!--<p>Description: {{ user.userprofile.description }}</p>-->
+    <!--<p>Phone: {{ user.userprofile.phone}}</p>-->
+    <!--<img src="{{ user.userprofile.image.url|default_if_none:'#' }}" width="240">-->
+
+</div>
+
+
+{% endblock %}

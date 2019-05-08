@@ -1,0 +1,70 @@
+<!-- included in every single page -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
+    {% block head %}
+    <!-- gives you a block space -->
+    <title>Base</title>
+
+    {% endblock %}
+  </head>
+  <body>
+    <br><br><br>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/account">Job Hunter</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+      <!-- <ul class="nav navbar-nav"> --->
+        <!-- { % url 'name' %} --->
+        {% if user.is_authenticated %}
+        &emsp;&emsp;
+        <li><a href="{% url 'home:home' %}">Home</a> &emsp;&emsp; </li>
+        <li><a href="{% url 'accounts:view_profile' %}">Profile</a> &emsp;&emsp;  </li>
+        <li><a href="{% url 'accounts:edit_profile' %}">Edit Profile</a> &emsp;&emsp;  </li>
+        <li><a href="{% url 'accounts:change_password' %}">Change Password</a> &emsp;&emsp;</li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'accounts:logout' %}">Log Out</a> &emsp;&emsp;  </li>
+        </ul>
+
+
+        {% else %}
+      <!-- <ul class="nav navbar-nav"> --->
+        <ul class="nav navbar-nav">
+          <li><a href="{% url 'accounts:reset_password' %}">Reset Password</a> &emsp;&emsp;</li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            &emsp;&emsp;
+            <li><a href="{% url 'accounts:register' %}">Register<span class="sr-only">(current)</span></a></li>
+        </ul>
+        {% endif %}
+
+         </nav>
+
+
+
+
+
+    {% block body %}
+
+    {% endblock %}
+
+  </body>
+</html>

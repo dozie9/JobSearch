@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <!-- Portfolio Grid Section -->
+    <div class="container" style="padding-top: 5rem; padding-bottom: 3rem">
+        {% for job in jobs %}
+        <div class="row">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ job.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ job.company }}</h6>
+                    <p class="card-text"><i class="fa fa-clock"> </i> {{ job.timestamp|timesince }}</p>
+                    <a href="{{ job.link }}" class="card-link btn btn-primary btn-sm">Apply</a>
+                  </div>
+                </div>
+        </div><br>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+ <!-- anything here will override anything inside base.html blockhead -->
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top: 6rem; padding-bottom: 3rem">
+        <div class="row">
+            <div class="col-md-9 mx-auto">
+                <div class="row">
+                <div class="col-md-4">
+                    <h3>Email</h3>
+                    <p>{{ request.user.email }}</p>
+                </div>
+                <div class="col-md-4" style="color: blue">
+                    <p>Change email address</p>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Password</h3>
+                        <p>**********</p>
+                    </div>
+                    <div class="col-md-4" style="color: blue">
+                        <p>Change password</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Phone</h3>
+                        <p>{{ request.user.userprofile.phone }}</p>
+                    </div>
+                    <div class="col-md-4" style="color: blue">
+                        {% if request.user.userprofile.phone %}
+                            <p>Change phone number</p>
+                        {% else %}<p>Add phone number</p>
+                        {% endif %}
+            </div>
+        </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block body %}
+<div class="container">
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <button type="submit" name="button">Submit</button>
+    </form>
+
+
+
+</div>
+
+
+{% endblock %}

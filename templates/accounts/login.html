@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+  <!-- Portfolio Grid Section -->
+    <div class="container" style="padding-top: 6rem; padding-bottom: 3rem">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div class="card text-white bg-info mx-auto">
+                  <div class="card-header"><h3>Login</h3></div>
+                  <div class="card-body">
+                      <form method="post">{% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>Username</b></p>
+                                </blockquote>
+                              <div class="input-group">
+                                  {{ form.username }}
+                                  <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>Password</b></p>
+                                </blockquote>
+                                <div class="input-group">
+                                  {{ form.password }}
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios1">
+                                      <label class="form-check-label" for="exampleRadios1">
+                                        Keep me signed in
+                                      </label>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <button class="btn btn-success col-12"><b>Sign In</b></button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group col-md-12">
+                          Don't have an account? Click <a href="{% url 'accounts:register' %}">here </a>to register
+                        </div>
+                    </div>
+                          <input type="hidden" name="next" value="{% url 'home:home' %}">
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+
+
+<h1>Welcome</h1>
+<p>
+  You can log in here
+</p>
+<h2>Login</h2>
+<form method = "post">
+  {% csrf_token %}
+  {{ form }} <!-- form as paragraph -->
+<button type="submit" name="button"> Log In</button>
+</form>
+</div>
+<!-- data that we're submitting through that form is secure -->
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+<h1>Register</h1>
+<form method="post">
+  <!-- more secure of sending data through http protocol -->
+  {% csrf_token %}
+  {{ form.as_p }} <!-- render using paragraph -->
+  <button type="submit" name="button">Submit</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <!-- Portfolio Grid Section -->
+    <div class="container" style="padding-top: 6rem; padding-bottom: 3rem">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div class="card text-white bg-info mx-auto">
+                  <div class="card-header"><h3>Register</h3></div>
+                  <div class="card-body">
+                      <form method="post">{% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>Username</b></p>
+                                </blockquote>
+                              <div class="input-group">
+                                  {{ form.username }}
+                                </div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>First name</b></p>
+                                </blockquote>
+                                <div class="input-group">
+                                  {{ form.first_name }}
+                                </div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>Last name</b></p>
+                                </blockquote>
+                                <div class="input-group">
+                                  {{ form.last_name }}
+                                </div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>Email</b></p>
+                                </blockquote>
+                                <div class="input-group">
+                                  {{ form.email }}
+                                </div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>Password</b></p>
+                                </blockquote>
+                                <div class="input-group">
+                                  {{ form.password1 }}
+                                </div>
+                                <div class="input-group">{{ form.errors.password1 }}</div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <blockquote class="blockquote text-left">
+                                  <p class="mb-0"><b>Password Confirmation</b></p>
+                                </blockquote>
+                                <div class="input-group">
+                                  {{ form.password2 }}
+                                </div>
+                                <div class="input-group">{{ form.errors.password2 }}</div>
+                            </div>
+                          </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                              <button class="btn btn-success col-12"><b>Create Account</b></button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                        <div class="form-group col-md-12">
+                          Already have an account? Click <a href="{% url 'accounts:login' %}">here </a>to login
+                        </div>
+                    </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1>Register</h1>
+<form method="post">
+  <!-- more secure of sending data through http protocol -->
+  {% csrf_token %}
+  {{ form.as_p }} <!-- render using paragraph -->
+  <button type="submit" name="button">Submit</button>
+</form>
+</div>
+{% endblock %}

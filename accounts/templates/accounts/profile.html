@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+ <!-- anything here will override anything inside base.html blockhead -->
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    <h1>Profile</h1>
+    <p>Username: {{ user }}</p>
+    <p>First name: {{ user.first_name }}</p>
+    <p>Last name: {{ user.last_name }} </p>
+    <p>Email: {{ user.email }} </p>
+    <!--<p>Description: {{ user.userprofile.description }}</p>-->
+    <!--<p>Phone: {{ user.userprofile.phone}}</p>-->
+    <!--<img src="{{ user.userprofile.image.url|default_if_none:'#' }}" width="240">-->
+
+</div>
+
+
+{% endblock %}

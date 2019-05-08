@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+ <!-- Header -->
+  <header class="masthead bg-secondary text-white text-center">
+    <div class="container">
+      <img class="img-fluid mb-5 d-block mx-auto" src="{% static 'img/search_logo.png' %}" alt="" width="10%" style="padding-top: 10px">
+      <h1 class="text-uppercase mb-0">Search Jobs</h1>
+      <h2 class="font-weight-light mb-0">boost your chances now</h2>
+    </div>
+  </header>
+
+  <!-- Portfolio Grid Section -->
+    <div class="container" style="padding-top: 3rem; padding-bottom: 3rem">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div class="card text-white bg-info mx-auto">
+                  <div class="card-header"><h3>Job Search</h3></div>
+                  <form class="card-body" method="post">
+                      {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <blockquote class="blockquote text-left">
+                              <p class="mb-0"><b>Major</b></p>
+                              <footer class="text-sm-left"><small>School Major</small></footer>
+                            </blockquote>
+                          <div class="input-group">
+                              <input name="school_major" type="text" class="form-control py-2 border-right-0 border" id="inputEmail4" placeholder="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <blockquote class="blockquote text-left">
+                              <p class="mb-0"><b>Job Type</b></p>
+                              <footer class="text-sm-left"><small>Job title, keyword or company</small></footer>
+                            </blockquote>
+                            <div class="input-group">
+                              <input name="job_type" type="text" class="form-control py-2 border-right-0 border" id="inputEmail4" placeholder="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <blockquote class="blockquote text-left">
+                              <p class="mb-0"><b>Location</b></p>
+                              <footer class="text-sm-left"><small>City, state or zip code</small></footer>
+                            </blockquote>
+                            <div class="input-group">
+                              <input name="location" type="text" class="form-control" id="inputEmail4" placeholder="New York, NY">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-search-location"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                          <textarea name="resume" type="text" class="form-control" rows="8" id="inputEmail4" placeholder="Paste your resume"></textarea>
+                        </div>
+                      </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                          <button class="btn btn-danger btn-sm">Clear resume</button>
+                        </div>
+                      </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                          <button class="btn btn-success col-12"><b>Find Jobs</b></button>
+                        </div>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}
